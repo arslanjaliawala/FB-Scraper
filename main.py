@@ -48,10 +48,13 @@ class Selenium():
         chrome_options.add_argument("profile-directory=Default")
         chrome_options.add_argument("--disable-dev-shm-usage")
         chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--timeout=300")
 
         # Initialize the Chrome browser using the ChromeDriverManager.
         self.browser = webdriver.Chrome(
             ChromeDriverManager().install(), options=chrome_options)
+
+
 
     # Define a method to get the page source using Selenium.
     def get_page_source(self, url):
@@ -94,7 +97,7 @@ class Selenium():
     # Define a method tp scrape the Facebook Marketplace page using Selenium, BeautifulSoup, and SQLite.
     def scrape_facebook_marketplace(self):
         # Initialize the Selenium class.
-        # sel = Selenium()
+        sel = Selenium()
         # Initialize the database connection.
         conn = sqlite3.connect("facebook_marketplace.db")
         c = conn.cursor()
@@ -112,7 +115,7 @@ class Selenium():
                     self.browser.execute_script(
                         "window.scrollTo(0, document.body.scrollHeight);")
                     # Sleep for 5 seconds then scroll again.
-                    time.sleep(1)
+                    time.sleep(5)
                
                 # Get the page source using Selenium.
                 page_source = self.get_page_source(url)
